@@ -19,6 +19,10 @@ public class Ray : MonoBehaviour
         if (other.CompareTag("Human"))
         {
             Debug.Log("You Got A Human!");
+            if (GameManager.instance != null)
+            {
+                GameManager.instance.AddScore(100);
+            }
             Destroy(other.gameObject);
         }
     }

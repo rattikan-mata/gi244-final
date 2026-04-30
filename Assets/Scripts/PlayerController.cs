@@ -42,7 +42,6 @@ public class PlayerController : MonoBehaviour
     /*private Animator playerAnim;
     private AudioSource playerAudio;*/
 
-    public bool gameOver = false;
 
     private int currentLane = 1;
     private float targetX;
@@ -60,7 +59,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        Physics.gravity *= gravityModifier;
+        Physics.gravity = new Vector3(0, -9.81f * gravityModifier, 0);
 
         jumpAction = InputSystem.actions.FindAction("Jump");
         moveAction = InputSystem.actions.FindAction("Move");
@@ -77,7 +76,6 @@ public class PlayerController : MonoBehaviour
 
         lastJumpTime = -jumpCooldown;
 
-        gameOver = false;
 
         
         if (ufoBeamCone != null)
@@ -92,7 +90,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (gameOver) return;
+        if (GameManager.instance == null || !GameManager.instance.isGameActive) return;
 
         HandleLaneSwitching();
         HandleJump();
@@ -190,15 +188,12 @@ public class PlayerController : MonoBehaviour
             isOnGround = true;
             //dirtParticle.Play();
         }
-        else if (collision.gameObject.CompareTag("Obstacle"))
-        {
-            Debug.Log("Game Over!");
-            gameOver = true;
-            /*playerAnim.SetBool("Death_b", true);
-            playerAnim.SetInteger("DeathType_int", 1);
-            explosionParticle.Play();
-            dirtParticle.Stop();
-            playerAudio.PlayOneShot(crashSfx);*/
-        }
+        
+        /*playerAnim.SetBool("Death_b", true);
+        playerAnim.SetInteger("DeathType_int", 1);
+        explosionParticle.Play();
+        dirtParticle.Stop();
+        playerAudio.PlayOneShot(crashSfx);*/
+        
     }
 }

@@ -8,8 +8,8 @@ public class TimeManager : MonoBehaviour
 
     void Update()
     {
-        
-        if (Time.timeScale < maxTimeScale)
+        if (GameManager.instance == null || !GameManager.instance.isGameActive) return;
+        if (Time.timeScale > 0f && Time.timeScale < maxTimeScale)
         {
             Time.timeScale += timeIncreaseRate * Time.unscaledDeltaTime;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
