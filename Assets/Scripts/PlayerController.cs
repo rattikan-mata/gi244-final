@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections; // เพิ่มเข้ามาสำหรับ Coroutine
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,6 +18,21 @@ public class PlayerController : MonoBehaviour
 
     [Header("Jump Cooldown")]
     public float jumpCooldown = 3f;
+
+    
+    [Header("UFO Beam Emission Settings")]
+    public GameObject ufoBeamCone;      
+    [ColorUsage(false, true)] public Color baseBeamColor = Color.cyan;
+    
+    public float minIntensity = -10f;
+    public float maxIntensity = 5f;
+    
+    public float fadeInDuration = 0.2f;
+    public float beamStayDuration = 0.5f;
+    public float fadeOutDuration = 0.3f;
+
+    private Material beamMaterial;
+    private Coroutine beamCoroutine;
 
     private Rigidbody rb;
     private InputAction jumpAction;
@@ -62,6 +78,16 @@ public class PlayerController : MonoBehaviour
         lastJumpTime = -jumpCooldown;
 
         gameOver = false;
+
+        
+        if (ufoBeamCone != null)
+        {
+            beamMaterial = ufoBeamCone.GetComponent<Renderer>().material;
+            beamMaterial.EnableKeyword("_EMISSION");
+            
+            SetBeamIntensity(minIntensity);
+            ufoBeamCone.SetActive(false);
+        }
     }
 
     void Update()
@@ -101,7 +127,48 @@ public class PlayerController : MonoBehaviour
             /*playerAnim.SetTrigger("Jump_trig");
             dirtParticle.Stop();
             playerAudio.PlayOneShot(jumpSfx);*/
+
+            if (ufoBeamCone != null)
+            {
+                if (beamCoroutine != null) StopCoroutine(beamCoroutine);
+                beamCoroutine = StartCoroutine(FadeBeamRoutine());
+            }
         }
+    }
+
+    private IEnumerator FadeBeamRoutine()
+    {
+        ufoBeamCone.SetActive(true);
+
+        float elapsedTime = 0f;
+        while (elapsedTime < fadeInDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float currentIntensity = Mathf.Lerp(minIntensity, maxIntensity, elapsedTime / fadeInDuration);
+            SetBeamIntensity(currentIntensity);
+            yield return null; 
+        }
+
+        SetBeamIntensity(maxIntensity);
+        yield return new WaitForSeconds(beamStayDuration);
+
+        elapsedTime = 0f;
+        while (elapsedTime < fadeOutDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float currentIntensity = Mathf.Lerp(maxIntensity, minIntensity, elapsedTime / fadeOutDuration);
+            SetBeamIntensity(currentIntensity);
+            yield return null;
+        }
+
+        SetBeamIntensity(minIntensity);
+        ufoBeamCone.SetActive(false); 
+    }
+
+    private void SetBeamIntensity(float intensity)
+    {
+        float hdrMultiplier = Mathf.Pow(2f, intensity);
+        beamMaterial.SetColor("_EmissionColor", baseBeamColor * hdrMultiplier);
     }
 
     private void SmoothMoveTolane()
