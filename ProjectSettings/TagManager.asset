@@ -7,6 +7,9 @@ TagManager:
   - Ground
   - Human
   - Obstacle
+  - MysteryBox
+  - Ray
+  - Bomb
   layers:
   - Default
   - TransparentFX

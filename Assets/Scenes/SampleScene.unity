@@ -7413,7 +7413,7 @@ GameObject:
   - component: {fileID: 1667314157}
   m_Layer: 0
   m_Name: Cone
-  m_TagString: Untagged
+  m_TagString: Ray
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8419,6 +8419,7 @@ MonoBehaviour:
   gameOverPanel: {fileID: 1470234346}
   scoreText: {fileID: 1828213081}
   hpText: {fileID: 1937297972}
+  countdownText: {fileID: 0}
   maxHP: 3
   isGameActive: 0
 --- !u!4 &1703277705
@@ -9629,6 +9630,8 @@ MonoBehaviour:
   obstaclePrefabs:
   - {fileID: 120106401582379275, guid: 804df4c487fbeb34898ed9d778b5cbbb, type: 3}
   - {fileID: 2300196324767918254, guid: 4983de4573c0f33499b87ff2ad1a6f16, type: 3}
+  - {fileID: 1818861082154570, guid: 5e45c8f884f6d124ea0499aae7fdbec8, type: 3}
+  - {fileID: 3607280597225470808, guid: 8a207988b474c204fbc1148084bcedbb, type: 3}
   spawnPoint:
   - {fileID: 947772400}
   - {fileID: 474446148}

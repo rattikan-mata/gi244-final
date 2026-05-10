@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: -73757826508274229}
   - component: {fileID: -6646912902435906520}
   - component: {fileID: -2598658737330011959}
+  - component: {fileID: 85396853877200979}
   m_Layer: 0
   m_Name: GameBox-0.png
-  m_TagString: Human
+  m_TagString: MysteryBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -133,7 +134,6 @@ MonoBehaviour:
   speedUpMultiplier: 1.5
   speedDownMultiplier: 0.6
   effectDuration: 10
-  countdownText: {fileID: 0}
 --- !u!54 &-73757826508274229
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -156,7 +156,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -176,7 +176,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -195,3 +195,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveBack
   moveSpeed: 5
+--- !u!114 &85396853877200979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3607280597225470808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed9e4e54b218d64b85222b41357f051, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Destroy
