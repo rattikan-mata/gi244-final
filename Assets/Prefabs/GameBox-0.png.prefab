@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MysteryBox
   speedUpMultiplier: 1.5
-  speedDownMultiplier: 0.6
+  speedDownMultiplier: 0.7
   effectDuration: 10
 --- !u!54 &-73757826508274229
 Rigidbody:
@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0b6968f27c39af46a62d23f63cbb6ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveBack
-  moveSpeed: 5
+  moveSpeed: 7
 --- !u!114 &85396853877200979
 MonoBehaviour:
   m_ObjectHideFlags: 0

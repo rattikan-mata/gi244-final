@@ -15,7 +15,7 @@ public class MysteryBox : MonoBehaviour
             {
                 bool isSpeedUp = Random.value > 0.5f;
                 float multiplier = isSpeedUp ? speedUpMultiplier : speedDownMultiplier;
-                string label = isSpeedUp ? "Speed UP!" : "Speed DOWN";
+                string label = isSpeedUp ? "Speed UP!" : "SLOW";
 
                 GameManager.instance.ApplySpeedEffect(multiplier, effectDuration, label);
             }

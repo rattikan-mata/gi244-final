@@ -30666,7 +30666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0b6968f27c39af46a62d23f63cbb6ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveBack
-  moveSpeed: 5
+  moveSpeed: 7
 --- !u!1 &1846604720013428
 GameObject:
   m_ObjectHideFlags: 0

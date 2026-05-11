@@ -12,10 +12,14 @@ public class GameManager : MonoBehaviour
     public GameObject gamePlayPanel;
     public GameObject gameOverPanel;
 
-    [Header("UI Text")]
+    [Header("UI Text - HUD")]
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI hpText;
     public TextMeshProUGUI countdownText;
+
+    [Header("UI Text - Game Over")]
+    public TextMeshProUGUI finalScoreText;
+    public TextMeshProUGUI highScoreText;
 
     [Header("Game Settings")]
     public int maxHP = 3;
@@ -52,10 +56,8 @@ public class GameManager : MonoBehaviour
         isGameActive = true;
         score = 0;
         currentHP = maxHP;
-
         UpdateScoreText();
         UpdateHPText();
-
         mainMenuPanel.SetActive(false);
         gamePlayPanel.SetActive(true);
         Time.timeScale = 1f;
@@ -97,6 +99,18 @@ public class GameManager : MonoBehaviour
         }
         if (countdownText != null) countdownText.gameObject.SetActive(false);
 
+        int savedHighScore = PlayerPrefs.GetInt("HighScore", 0);
+        bool isNewRecord = score > savedHighScore;
+        if (isNewRecord)
+        {
+            PlayerPrefs.SetInt("HighScore", score);
+            PlayerPrefs.Save();
+            savedHighScore = score;
+        }
+
+        if (finalScoreText != null) finalScoreText.text = "Score: " + score;
+        if (highScoreText != null) highScoreText.text = "Best: " + savedHighScore;
+
         gamePlayPanel.SetActive(false);
         gameOverPanel.SetActive(true);
         Time.timeScale = 0f;
@@ -132,8 +146,7 @@ public class GameManager : MonoBehaviour
         while (remaining > 0f)
         {
             if (countdownText != null)
-                countdownText.text = label + "\n" + Mathf.CeilToInt(remaining) + "s";
-
+                countdownText.text = label + "\n" + Mathf.CeilToInt(remaining) + " s";
             yield return new WaitForSecondsRealtime(1f);
             remaining -= 1f;
         }
@@ -146,7 +159,6 @@ public class GameManager : MonoBehaviour
             countdownText.text = "";
             countdownText.gameObject.SetActive(false);
         }
-
         speedEffectCoroutine = null;
     }
 }
