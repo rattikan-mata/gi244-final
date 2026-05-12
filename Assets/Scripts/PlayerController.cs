@@ -1,16 +1,13 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections; // เพิ่มเข้ามาสำหรับ Coroutine
+using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
     public float jumpForce;
     public float gravityModifier;
     /*public ParticleSystem explosionParticle;
-    public ParticleSystem dirtParticle;
-
-    public AudioClip jumpSfx;
-    public AudioClip crashSfx;*/
+    public ParticleSystem dirtParticle;*/
 
     [Header("Lane Settings")]
     public float laneWidth = 3f;
@@ -31,6 +28,11 @@ public class PlayerController : MonoBehaviour
     public float beamStayDuration = 0.5f;
     public float fadeOutDuration = 0.3f;
 
+    [Header("Audio Settings")]
+    public AudioClip moveSfx;
+    public AudioClip jumpSfx;
+    private AudioSource playerAudio;
+
     private Material beamMaterial;
     private Coroutine beamCoroutine;
 
@@ -39,9 +41,7 @@ public class PlayerController : MonoBehaviour
     private InputAction moveAction;
     private bool isOnGround = true;
 
-    /*private Animator playerAnim;
-    private AudioSource playerAudio;*/
-
+    /*private Animator playerAnim;*/
 
     private int currentLane = 1;
     private float targetX;
@@ -53,8 +53,8 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        /*playerAnim = GetComponent<Animator>();
-        playerAudio = GetComponent<AudioSource>();*/
+        playerAudio = GetComponent<AudioSource>();
+        /*playerAnim = GetComponent<Animator>();*/
     }
 
     void Start()
@@ -75,8 +75,6 @@ public class PlayerController : MonoBehaviour
         transform.position = startPos;
 
         lastJumpTime = -jumpCooldown;
-
-
         
         if (ufoBeamCone != null)
         {
@@ -106,11 +104,13 @@ public class PlayerController : MonoBehaviour
         {
             currentLane--;
             targetX = GetLaneX(currentLane);
+            playerAudio.PlayOneShot(moveSfx);
         }
         else if (pressedRight && currentLane < 2)
         {
             currentLane++;
             targetX = GetLaneX(currentLane);
+            playerAudio.PlayOneShot(moveSfx);
         }
     }
 
@@ -123,8 +123,9 @@ public class PlayerController : MonoBehaviour
             lastJumpTime = Time.time;
 
             /*playerAnim.SetTrigger("Jump_trig");
-            dirtParticle.Stop();
-            playerAudio.PlayOneShot(jumpSfx);*/
+            dirtParticle.Stop();*/
+
+            playerAudio.PlayOneShot(jumpSfx);
 
             if (ufoBeamCone != null)
             {
