@@ -4,15 +4,16 @@ public class TimeManager : MonoBehaviour
 {
     [Header("Time Settings")]
     public float timeIncreaseRate = 0.02f;
-    public float maxTimeScale = 2.0f;
+    public float maxBaseTimeScale = 10.0f;
 
     void Update()
     {
         if (GameManager.instance == null || !GameManager.instance.isGameActive) return;
-        if (Time.timeScale > 0f && Time.timeScale < maxTimeScale)
+        
+        if (GameManager.instance.baseTimeScale < maxBaseTimeScale)
         {
-            Time.timeScale += timeIncreaseRate * Time.unscaledDeltaTime;
-            Time.fixedDeltaTime = 0.02f * Time.timeScale;
+            float amountToAdd = timeIncreaseRate * Time.unscaledDeltaTime;
+            GameManager.instance.AddAutoSpeed(amountToAdd);
         }
     }
 
@@ -22,7 +23,6 @@ public class TimeManager : MonoBehaviour
         Time.fixedDeltaTime = 0.02f;
     }
 
-    // เผื่อเผลอเปลี่ยนฉากแล้วลืมรีเซ็ตเวลา
     void OnDestroy()
     {
         ResetTime();

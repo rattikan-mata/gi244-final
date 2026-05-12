@@ -30524,7 +30524,6 @@ GameObject:
   - component: {fileID: 4911057012121422}
   - component: {fileID: 95448628147039386}
   - component: {fileID: 6277906778505628223}
-  - component: {fileID: -4731723491039239700}
   - component: {fileID: -1114935137879106282}
   - component: {fileID: -3805626016186257380}
   - component: {fileID: 2351158405021621758}
@@ -30589,19 +30588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed9e4e54b218d64b85222b41357f051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Destroy
---- !u!114 &-4731723491039239700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1818861082154570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b11f3edd26117b489bd854d10563f61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BombAbduct
-  scorePenalty: 300
+  explosionEffect: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
 --- !u!65 &-1114935137879106282
 BoxCollider:
   m_ObjectHideFlags: 0

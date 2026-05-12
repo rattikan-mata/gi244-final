@@ -76,6 +76,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 00bb1fa141cc8834f98c52ef4df300ec, type: 3}
       insertIndex: -1
       addedObject: {fileID: -2119770248429910138}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 00bb1fa141cc8834f98c52ef4df300ec, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6723057749686566083}
   m_SourcePrefab: {fileID: 100100000, guid: 00bb1fa141cc8834f98c52ef4df300ec, type: 3}
 --- !u!1 &2300196324767918254 stripped
 GameObject:
@@ -130,6 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed9e4e54b218d64b85222b41357f051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Destroy
+  explosionEffect: {fileID: 0}
 --- !u!54 &-2119770248429910138
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -157,3 +161,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-6723057749686566083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2300196324767918254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f62e79dc7087184197adf24b94fc295, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Absorbable

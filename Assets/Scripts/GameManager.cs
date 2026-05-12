@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
     [Header("Game Settings")]
     public int maxHP = 3;
 
+    [HideInInspector] public float baseTimeScale = 1f;
+    private float currentBuffMultiplier = 1f;
+
     private int score = 0;
     private int currentHP;
     public bool isGameActive = false;
@@ -56,11 +59,15 @@ public class GameManager : MonoBehaviour
         isGameActive = true;
         score = 0;
         currentHP = maxHP;
+        
+        baseTimeScale = 1f;
+        currentBuffMultiplier = 1f;
+        UpdateTimeScale(); 
+
         UpdateScoreText();
         UpdateHPText();
         mainMenuPanel.SetActive(false);
         gamePlayPanel.SetActive(true);
-        Time.timeScale = 1f;
     }
 
     public void AddScore(int amount)
@@ -124,9 +131,22 @@ public class GameManager : MonoBehaviour
 
     public void ExitGame()
     {
-        Debug.Log("Exit Game!");
         Application.Quit();
     }
+
+    public void AddAutoSpeed(float amount)
+    {
+        baseTimeScale += amount;
+        UpdateTimeScale();
+    }
+
+    private void UpdateTimeScale()
+    {
+        if (!isGameActive) return;
+        Time.timeScale = baseTimeScale * currentBuffMultiplier;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
+    }
+
 
     public void ApplySpeedEffect(float multiplier, float duration, string label)
     {
@@ -136,9 +156,8 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator SpeedEffectRoutine(float multiplier, float duration, string label)
     {
-        float originalScale = Time.timeScale;
-        Time.timeScale = originalScale * multiplier;
-        Time.fixedDeltaTime = 0.02f * Time.timeScale;
+        currentBuffMultiplier = multiplier;
+        UpdateTimeScale();
 
         if (countdownText != null) countdownText.gameObject.SetActive(true);
 
@@ -151,8 +170,8 @@ public class GameManager : MonoBehaviour
             remaining -= 1f;
         }
 
-        Time.timeScale = originalScale;
-        Time.fixedDeltaTime = 0.02f * Time.timeScale;
+        currentBuffMultiplier = 1f;
+        UpdateTimeScale();
 
         if (countdownText != null)
         {
