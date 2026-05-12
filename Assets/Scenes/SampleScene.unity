@@ -1413,6 +1413,8 @@ MonoBehaviour:
   fadeInDuration: 0.2
   beamStayDuration: 0.5
   fadeOutDuration: 0.3
+  moveSfx: {fileID: 0}
+  jumpSfx: {fileID: 0}
 --- !u!54 &277050292
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6645,6 +6647,8 @@ MonoBehaviour:
   fadeInDuration: 0.2
   beamStayDuration: 0.7
   fadeOutDuration: 0.2
+  moveSfx: {fileID: 8300000, guid: fd8913a4e01b1874f96226bd37230135, type: 3}
+  jumpSfx: {fileID: 8300000, guid: c58f607113ff3ff4b8a0c3e4a20b4d5b, type: 3}
 --- !u!54 &1301839474
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9575,6 +9579,7 @@ MonoBehaviour:
   humanScore: 100
   bombPenalty: -300
   rayOrigin: {fileID: 644468793}
+  crashSfx: {fileID: 8300000, guid: a09e1d23ff905e549abc4756a42b3f6a, type: 3}
 --- !u!1 &1703277703
 GameObject:
   m_ObjectHideFlags: 0
@@ -9615,6 +9620,8 @@ MonoBehaviour:
   finalScoreText: {fileID: 330264877}
   highScoreText: {fileID: 257207387}
   maxHP: 3
+  startSfx: {fileID: 8300000, guid: 86f90ac81cb7bd942a4240642c299250, type: 3}
+  overSfx: {fileID: 8300000, guid: 118192c059e71ac40887bb3e32a74d73, type: 3}
   baseTimeScale: 1
   isGameActive: 0
 --- !u!4 &1703277705

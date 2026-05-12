@@ -24,6 +24,11 @@ public class GameManager : MonoBehaviour
     [Header("Game Settings")]
     public int maxHP = 3;
 
+    [Header("Audio Settings")]
+    public AudioClip startSfx;
+    public AudioClip overSfx;
+    private AudioSource playerAudio;
+
     [HideInInspector] public float baseTimeScale = 1f;
     private float currentBuffMultiplier = 1f;
 
@@ -37,6 +42,7 @@ public class GameManager : MonoBehaviour
     {
         if (instance == null) instance = this;
         else Destroy(gameObject);
+        playerAudio = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -59,7 +65,9 @@ public class GameManager : MonoBehaviour
         isGameActive = true;
         score = 0;
         currentHP = maxHP;
-        
+
+        playerAudio.PlayOneShot(startSfx);
+
         baseTimeScale = 1f;
         currentBuffMultiplier = 1f;
         UpdateTimeScale(); 
@@ -98,6 +106,8 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         isGameActive = false;
+
+        playerAudio.PlayOneShot(overSfx);
 
         if (speedEffectCoroutine != null)
         {
